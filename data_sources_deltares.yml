@@ -181,7 +181,7 @@ era5:
     source_license: https://cds.climate.copernicus.eu/cdsapp/#!/terms/licence-to-use-copernicus-products
     source_url: https://doi.org/10.24381/cds.bd0915c6
     source_version: ERA5 daily data on pressure levels
-  path: forcing/ERA5/daily/era5_{year}_daily.nc
+  path: forcing/ERA5/daily_merged/era5_{year}_daily.nc
   rename:
     msl: press_msl
     ssrd: kin
@@ -194,11 +194,9 @@ era5:
     temp: -273.15
     temp_max: -273.15
     temp_min: -273.15
-    time: 86400
   unit_mult:
     kin: 0.000277778
     kout: 0.000277778
-    precip: 1000
     press_msl: 0.01
 era5_hourly:
   crs: 4326
