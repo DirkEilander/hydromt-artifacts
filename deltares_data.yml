@@ -103,6 +103,22 @@ dtu10mdt:
     source_url: https://www.space.dtu.dk/english/research/scientific_data_and_models/global_mean_dynamic_topography
     source_version: 2010
     unit: m+EGM2008
+dtu10mdt_egm96:
+  path: topography/dtu10mdt/DTU10MDT_1min_egm96.tif
+  crs: 4326
+  data_type: RasterDataset
+  driver: raster
+  kwargs:
+    chunks:
+      x: 3600
+      y: 3600
+  meta:
+    category: topography
+    paper_doi: 10.1029/2008JC005179
+    paper_ref: Andersen and Knudsen (2009)
+    source_url: https://www.space.dtu.dk/english/research/scientific_data_and_models/global_mean_dynamic_topography
+    source_version: 2010
+    unit: m+EGM96
 eobs: 
   alias: eobs_v22.0e
 eobs_v22.0e:
