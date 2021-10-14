@@ -87,6 +87,22 @@ corine_2018_v2020_u1:
     source_url: https://land.copernicus.eu/pan-european/corine-land-cover/clc2018
     source_version: v.2020_20u1
   path: landuse/corine/CLC2018_CLC2018_V2018_20.tif
+dtu10mdt:
+  path: topography/dtu10mdt/DTU10MDT_1min_float32.tif
+  crs: 4326
+  data_type: RasterDataset
+  driver: raster
+  kwargs:
+    chunks:
+      x: 3600
+      y: 3600
+  meta:
+    category: topography
+    paper_doi: 10.1029/2008JC005179
+    paper_ref: Andersen and Knudsen (2009)
+    source_url: https://www.space.dtu.dk/english/research/scientific_data_and_models/global_mean_dynamic_topography
+    source_version: 2010
+    unit: m+EGM2008
 eobs: 
   alias: eobs_v22.0e
 eobs_v22.0e:
@@ -807,6 +823,22 @@ koppen_geiger:
     source_version: 2017
   nodata: 0
   path: meteo/climate_classification_v2017/Map_KG-Global.tif
+mdt_cnes_cls18:
+  path: topography/mdt_cnes_cls18/MDT_CNES_CLS18_global_filled.tif
+  crs: 4326
+  data_type: RasterDataset
+  driver: raster
+  kwargs:
+    chunks:
+      x: 720
+      y: 720
+  meta:
+    category: topography
+    paper_doi: 10.5194/os-17-789-2021
+    paper_ref: Mulet et al (2021)
+    source_url: https://www.aviso.altimetry.fr/en/data/products/auxiliary-products/mdt.html
+    source_version: 18
+    unit: m+GOCO05S
 merit_hydro:
   alias: merit_hydro_v1.0
 merit_hydro_v1.0:
