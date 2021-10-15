@@ -942,7 +942,7 @@ merit_hydro_ihu_30sec_v1.0:
   rename:
     30sec_basids: basins
     30sec_flwdir: flwdir
-    30sec_elvtn: elevtn
+    30sec_elevtn: elevtn
     30sec_strord: strord
     30sec_uparea: uparea
     30sec_rivlen: rivlen
