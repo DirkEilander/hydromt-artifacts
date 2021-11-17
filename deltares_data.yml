@@ -1035,7 +1035,8 @@ rivers_lin2019_v1:
     source_version: 1
   path: hydrography/rivers_lin2019/rivers_ge30m.gpkg
   rename:
-    Width_m: rivwdth
+    width_m: rivwth
+    Q2: qbankfull
 simard:
   alias: simard_v2011
 simard_v2011:
