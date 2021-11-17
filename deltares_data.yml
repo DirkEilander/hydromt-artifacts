@@ -255,7 +255,7 @@ era5_daily:
     source_license: https://cds.climate.copernicus.eu/cdsapp/#!/terms/licence-to-use-copernicus-products
     source_url: https://doi.org/10.24381/cds.bd0915c6
     source_version: ERA5 daily data on pressure levels
-  path: meteo/era5_daily/nc_merged/era5_{year}_daily.nc
+  path: meteo/era5_daily/nc_merged/era5_*_daily.nc
   rename:
     msl: press_msl
     ssrd: kin
@@ -942,7 +942,7 @@ merit_hydro_ihu_30sec_v1.0:
   rename:
     30sec_basids: basins
     30sec_flwdir: flwdir
-    30sec_elvtn: elevtn
+    30sec_elevtn: elevtn
     30sec_strord: strord
     30sec_uparea: uparea
     30sec_rivlen: rivlen
