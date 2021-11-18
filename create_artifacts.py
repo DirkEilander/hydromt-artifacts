@@ -22,13 +22,7 @@ print(version_old, version_new)
 # make sure names are snake_case
 # new data sources should be configured in deltares_data.yml
 add_sources = ["rivers_lin2019_v1", "grip_roads", "wb_countries", "mdt_cnes_cls18"]
-remove_sources = [
-    "grib_roads_hig",
-    "grib_roads_loc",
-    "grib_roads_pri",
-    "grib_roads_sec",
-    "grib_roads_ter",
-]
+remove_sources = ["grib_roads_hig", "grib_roads_loc", "grib_roads_pri", "grib_roads_sec", "grib_roads_ter"]
 
 #%% permanent settings
 bbox = [11.6, 45.2, 13.00, 46.80]  # Piava river
@@ -63,6 +57,8 @@ data_catalog_new = DataCatalog(
 )
 # remove old names
 for old in remove_sources:
+    if old not in data_catalog_new:
+        continue
     source = data_catalog_new._sources.pop(old)
     for fn in glob.glob(str(source.path).format(year="*", variable="*", month="*")):
         print(f"removing {fn}")
@@ -91,6 +87,6 @@ for fn in glob.glob(join(dst, "*.py")):
 # NOTE: manually remove renamed files (if any)
 
 make_tarfile(join(dst, "data.tar.gz"), dst)
-#%% FINALLY
+#%% FINALLY 
 # update changelog!
 # publish the release online
