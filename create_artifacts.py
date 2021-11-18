@@ -6,6 +6,7 @@ from os.path import join, isdir, isfile
 from pathlib import Path
 import shutil
 import tarfile
+import glob
 
 
 def make_tarfile(output_filename, source_dir):
@@ -14,54 +15,46 @@ def make_tarfile(output_filename, source_dir):
 
 
 #%% versions and new data
-version_old = DataCatalog._version
-version_new = "v0.0.4"
+version_old = "v0.0.5"
+version_new = "v0.0.6"
 print(version_old, version_new)
-data_libs = ["data_catalog.yml"]  # paths to new data libs
 
 # make sure names are snake_case
-rename = {
-    "GDP_world": "gdp_world",
-    "GHS-POP_2015": "ghs_pop_2015",
-    "GHS-SMOD_2015": "ghs_smod_2015",
-    "GHS-SMOD_2015_v2": "ghs-smod_2015_v2",
-}
+# new data sources should be configured in deltares_data.yml
+add_sources = ["rivers_lin2019_v1", "grip_roads", "wb_countries", "mdt_cnes_cls18"]
+remove_sources = [
+    "grib_roads_hig",
+    "grib_roads_loc",
+    "grib_roads_pri",
+    "grib_roads_sec",
+    "grib_roads_ter",
+]
 
 #%% permanent settings
 bbox = [11.6, 45.2, 13.00, 46.80]  # Piava river
 time_tuple = ("2010-02-01", "2010-02-14")
-deltares_root = r"p:/wflow_global"  # root in deltares_data
+deltares_root = r"p:/wflow_global/hydromt"  # root in deltares_data
 
 # old and new folders
 src = join(Path.home(), ".hydromt_data", "data", version_old)
 dst = join(Path.home(), ".hydromt_data", "data", version_new)
-
-sources_new = list(DataCatalog(data_libs=data_libs).sources.keys()) + list(
-    rename.values()
-)
 
 #%% download old data to src and copy to dst
 data_catalog_old = DataCatalog(artifact_data=version_old)  # triggers download
 shutil.copytree(src=src, dst=dst)
 # rename original data_catalog
 
-#%% update deltares data yml
-data_catalog = DataCatalog(deltares_data=version_old, data_libs=data_libs)
-for old, new in rename.items():
-    if old in data_catalog.sources:
-        data_catalog._sources[new] = data_catalog._sources.pop(old)
-data_catalog.to_yml(join(dst, "data_sources_deltares.yml"), root=deltares_root)
-
-
 # %% export new data to dst; keep old yml file
+dres_data_catalog = DataCatalog(data_libs="deltares_data.yml")
 if isfile(join(dst, "data_catalog.yml")):
     shutil.move(join(dst, "data_catalog.yml"), join(dst, "data_catalog_old.yml"))
-data_catalog.export_data(
-    data_root=dst, bbox=bbox, time_tuple=time_tuple, source_names=sources_new
+dres_data_catalog.export_data(
+    data_root=dst, bbox=bbox, time_tuple=time_tuple, source_names=add_sources
 )
 shutil.move(join(dst, "data_catalog.yml"), join(dst, "data_catalog_tmp.yml"))
 
 #%% combine data_catalog_tmp + data_catalog_old
+# NOTE: after running this cell manually inspec the new and old yml files!
 data_catalog_new = DataCatalog(
     data_libs=[
         join(dst, "data_catalog_old.yml"),
@@ -69,25 +62,35 @@ data_catalog_new = DataCatalog(
     ]
 )
 # remove old names
-for old, new in rename.items():
-    if old in data_catalog_new.sources:
-        data_catalog_new._sources.pop(old)
+for old in remove_sources:
+    source = data_catalog_new._sources.pop(old)
+    for fn in glob.glob(str(source.path).format(year="*", variable="*", month="*")):
+        print(f"removing {fn}")
+        os.remove(fn)
 data_catalog_new.to_yml(join(dst, "data_catalog.yml"))
 
 # %% test
 data_catalog_final = DataCatalog(artifact_data=version_new)
 for name in data_catalog_final.sources:
-    print(name)
-    data_catalog_final[name].get_data(bbox=bbox)
+    try:
+        data_catalog_final[name].get_data(bbox=bbox)
+    except:
+        print(name)
 
 #%% clean up tmp and old yml files and make data.tar.gz archive
 if isfile(join(dst, "data_catalog_tmp.yml")):
     os.remove(join(dst, "data_catalog_tmp.yml"))
 if isfile(join(dst, "data_catalog_old.yml")):
     os.remove(join(dst, "data_catalog_old.yml"))
+if isfile(join(dst, "data_sources_deltares.yml")):
+    os.remove(join(dst, "data_sources_deltares.yml"))
 if isfile(join(dst, "data.tar.gz")):
     os.remove(join(dst, "data.tar.gz"))
+for fn in glob.glob(join(dst, "*.py")):
+    os.remove(fn)
 # NOTE: manually remove renamed files (if any)
 
 make_tarfile(join(dst, "data.tar.gz"), dst)
-#%% FINALLY make a t
+#%% FINALLY
+# update changelog!
+# publish the release online
