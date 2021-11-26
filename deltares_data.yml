@@ -29,7 +29,6 @@ chirps_africa_daily_v2.0:
       lon: 150
       time: 20
     combine: by_coords
-    concat_dim: time
     decode_times: true
     parallel: true
   meta:
@@ -56,7 +55,6 @@ chirps_global_daily_v2.0:
       longitude: 400
       time: 20
     combine: by_coords
-    concat_dim: time
     decode_times: true
     parallel: true
   meta:
@@ -239,11 +237,10 @@ era5_daily:
   driver: netcdf
   kwargs:
     chunks:
-      latitude: 125
-      longitude: 120
-      time: 50
+      latitude: 250
+      longitude: 240
+      time: 30
     combine: by_coords
-    concat_dim: time
     decode_times: true
     parallel: true
   meta:
@@ -282,7 +279,6 @@ era5_hourly:
       longitude: 120
       time: 50
     combine: by_coords
-    concat_dim: time
     decode_times: true
     parallel: true
   meta:
@@ -855,6 +851,27 @@ mdt_cnes_cls18:
     source_url: https://www.aviso.altimetry.fr/en/data/products/auxiliary-products/mdt.html
     source_version: 18
     unit: m+GOCO05S
+merit:
+  alias: merit_v1.0.3
+merit_v1.0.3:
+  path: topography/merit/merit.nc
+  crs: 4326
+  data_type: RasterDataset
+  driver: netcdf
+  rename:
+    elevation: elevtn
+  kwargs:
+    drop_variables: 'projection'
+    chunks:
+      lat: 6000
+      lon: 6000
+  meta:
+    category: topography
+    paper_doi: 10.1002/2017GL072874
+    paper_ref: Yamazaki et al. (2018)
+    source_license: CC-BY-NC 4.0 or ODbL 1.0
+    source_url: http://hydro.iis.u-tokyo.ac.jp/~yamadai/MERIT_DEM/
+    source_version: 1.0.3
 merit_hydro:
   alias: merit_hydro_v1.0
 merit_hydro_v1.0:
@@ -958,7 +975,7 @@ modis_mcd15a3h_v006:
       x: 3600
       y: 3600
     concat: true
-    concat_dim: time
+    combine: by_coords
   meta:
     category: landuse
     notes: this dataset has been extracted from GEE ('MODIS/006/MCD15A3H') for the
