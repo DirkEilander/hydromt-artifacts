@@ -751,7 +751,7 @@ gswo_v2019:
     source_url: https://global-surface-water.appspot.com/download
     source_version: v1_1_2019
   nodata: 255
-  path: hydrography/GSWO_Pekel/occur.vrt
+  path: hydrography/gswo/occur.vrt
 guf_bld_2012:
   alias: guf_bld_2012_v02
 guf_bld_2012_v02:
