@@ -975,7 +975,6 @@ modis_mcd15a3h_v006:
       x: 3600
       y: 3600
     concat: true
-    combine: by_coords
   meta:
     category: landuse
     notes: this dataset has been extracted from GEE ('MODIS/006/MCD15A3H') for the
