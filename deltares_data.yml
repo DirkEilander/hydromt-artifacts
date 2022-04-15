@@ -69,6 +69,57 @@ chirps_global_daily_v2.0:
     precipitation: precip
   unit_add:
     time: 86400
+copdem30:
+  alias: copdem30_2021.1
+copdem30_masked:
+  alias: copdem30_masked_2021.1
+copdem30_mask:
+  alias: copdem30_mask_2021.1
+copdem30_2021.1:
+  data_type: RasterDataset
+  driver: raster
+  path: topography/copdem/copdem.vrt
+  kwargs:
+    chunks:
+      x: 3600
+      y: 3600
+  meta:
+    category: topography
+    source_license: https://spacedata.copernicus.eu/documents/20126/0/CSCDA_ESA_Mission-specific+Annex+%281%29.pdf/83b44c0a-244a-7ba3-b00c-b578a34e88a7?t=1604070311399
+    source_url: https://spacedata.copernicus.eu/web/cscda/dataset-details?articleId=394198#D4
+    source_version: 2021_1
+  rename:
+    copdem: elevtn
+copdem30_masked_2021.1:
+  data_type: RasterDataset
+  driver: raster
+  path: topography/copdem/copdem_masked.vrt
+  rename:
+    copdem_masked: elevtn
+  kwargs:
+    chunks:
+      x: 3600
+      y: 3600
+  meta:
+    category: topography
+    source_license: https://spacedata.copernicus.eu/documents/20126/0/CSCDA_ESA_Mission-specific+Annex+%281%29.pdf/83b44c0a-244a-7ba3-b00c-b578a34e88a7?t=1604070311399
+    source_url: https://spacedata.copernicus.eu/web/cscda/dataset-details?articleId=394198#D4
+    source_version: 2021_1
+copdem30_mask_2021.1:
+  data_type: RasterDataset
+  driver: raster
+  path: topography/copdem/copdem_mask.vrt
+  rename:
+    copdem_mask: mask
+  kwargs:
+    chunks:
+      x: 3600
+      y: 3600
+  meta:
+    category: topography
+    source_license: https://spacedata.copernicus.eu/documents/20126/0/CSCDA_ESA_Mission-specific+Annex+%281%29.pdf/83b44c0a-244a-7ba3-b00c-b578a34e88a7?t=1604070311399
+    source_url: https://spacedata.copernicus.eu/web/cscda/dataset-details?articleId=394198#D4
+    source_version: 2021_1
 corine:
   alias: corine_2018_v2020_u1
 corine_2018_v2020_u1:
