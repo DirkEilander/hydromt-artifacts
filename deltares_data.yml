@@ -588,6 +588,8 @@ glofas_uparea:
     chunks:
       x: 150
       y: 360
+  unit_mult:
+    uparea: 0.000001
 ghs_pop:
   alias: ghs_pop_2015_54009_v2019a
 ghs_pop_2015_4326_v2019a:
