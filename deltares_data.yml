@@ -354,6 +354,22 @@ era5_hourly:
     kout: 0.000277778
     precip: 1000
     press_msl: 0.01
+era5_hourly_zarr:
+  crs: 4326
+  data_type: RasterDataset
+  driver: zarr
+  alias: era5_hourly
+  kwargs:
+    chunks: auto
+  path: meteo/era5.zarr
+era5_daily_zarr:
+  crs: 4326
+  data_type: RasterDataset
+  driver: zarr
+  alias: era5_daily
+  kwargs:
+    chunks: auto
+  path: meteo/era5_daily.zarr
 era5_ocean:
   crs: 4326
   data_type: RasterDataset
@@ -588,6 +604,8 @@ glofas_uparea:
     chunks:
       x: 150
       y: 360
+  unit_mult:
+    uparea: 0.000001
 ghs_pop:
   alias: ghs_pop_2015_54009_v2019a
 ghs_pop_2015_4326_v2019a:
