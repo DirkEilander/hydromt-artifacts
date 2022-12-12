@@ -22,7 +22,7 @@ print(version_old, version_new)
 # make sure names are snake_case
 # new data sources should be configured in deltares_data.yml
 add_sources = ["era5_daily_zarr", "era5_hourly_zarr"]
-remove_sources = ["era5", "era5_hourly"]
+remove_sources = []
 
 #%% permanent settings
 bbox = [11.6, 45.2, 13.00, 46.80]  # Piava river

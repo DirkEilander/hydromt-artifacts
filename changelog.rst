@@ -6,11 +6,6 @@ Added
 - era5_hourly_zarr
 - era5_daily_zarr
 
-Updated
--------
-- era5 now points to era5_daily_zarr; the original nc files have been removed
-- era5_hourly now points to era5_hourly_zarr; the original nc files have been removed
-
 
 v0.0.6 (18 Nov 2021)
 ====================
