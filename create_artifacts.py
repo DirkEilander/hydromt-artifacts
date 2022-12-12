@@ -1,6 +1,6 @@
 #%%
 import hydromt
-from hydromt.data_adapter import DataCatalog
+from hydromt import DataCatalog
 import os
 from os.path import join, isdir, isfile
 from pathlib import Path
@@ -15,14 +15,14 @@ def make_tarfile(output_filename, source_dir):
 
 
 #%% versions and new data
-version_old = "v0.0.5"
-version_new = "v0.0.6"
+version_old = "v0.0.6"
+version_new = "v0.0.7"
 print(version_old, version_new)
 
 # make sure names are snake_case
 # new data sources should be configured in deltares_data.yml
-add_sources = ["rivers_lin2019_v1", "grip_roads", "wb_countries", "mdt_cnes_cls18"]
-remove_sources = ["grib_roads_hig", "grib_roads_loc", "grib_roads_pri", "grib_roads_sec", "grib_roads_ter"]
+add_sources = ["era5_daily_zarr", "era5_hourly_zarr"]
+remove_sources = ["era5", "era5_hourly"]
 
 #%% permanent settings
 bbox = [11.6, 45.2, 13.00, 46.80]  # Piava river
