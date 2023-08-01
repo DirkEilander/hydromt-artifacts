@@ -427,6 +427,8 @@ grdc:
   crs: 4326
   data_type: GeoDataFrame
   driver: csv
+  driver_kwargs:
+    driver: csv
   meta:
     category: observed data
     source_info: GRDC-Station Catalogue, last downloaded 2020-07-16
